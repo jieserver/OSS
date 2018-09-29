@@ -11,7 +11,7 @@ const leveldb = _.reduce(store.leveldb,(r,v,k)=>{
 leveldb['test'].put('t','testValue')
 const app = new Express()
 
-app.use('/',(req,res)=>{
+app.use('/readme',(req,res)=>{
     var mdContent = fs.readFileSync(`./readme.md`).toString()
     var html = mdContent.slice(mdContent.indexOf('~~~')+3,mdContent.lastIndexOf('~~~'))
     var _back_ = 'https://wallpapers.wallhaven.cc/wallpapers/full/wallhaven-'+(690900 * Math.random()|0)+'.jpg',
@@ -20,7 +20,7 @@ app.use('/',(req,res)=>{
 })
 app.get('/:db/:key',(req,res)=>{
     var {db,key} = req.params
-    if(!leveldb[db]) return res.status(404)
+    if(!leveldb[db]) return res.status(404).end()
     leveldb[db].get(key)
     .then(r=>res.json(r))
     .catch(e=>res.json(e))
