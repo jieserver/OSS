@@ -1,0 +1,10 @@
+{
+    "leveldb":{
+        "test":{
+            "location":"./.store/test",
+            "options":{
+                "valueEncoding":"json"
+            }
+        }
+    }
+}
